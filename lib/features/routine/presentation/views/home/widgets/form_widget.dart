@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_routine/core/theme/app_theme.dart';
 import 'package:workout_routine/core/utils/constants.dart';
@@ -41,6 +42,8 @@ class _FormWidgetState extends State<FormWidget> {
               children: [
                 TextFormField(
                   controller: _nameController,
+                  autofocus: true,
+                  textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     label: Text('Name'),
                     border: OutlineInputBorder(),
@@ -48,22 +51,14 @@ class _FormWidgetState extends State<FormWidget> {
                   validator: (value) => _validator(value),
                 ),
                 const SizedBox(height: 8),
-                TextFormField(
+                _buildTextField(
                   controller: _repsController,
-                  decoration: const InputDecoration(
-                    label: Text('Num. of reps'),
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) => _validator(value),
+                  label: 'Num. of reps',
                 ),
                 const SizedBox(height: 8),
-                TextFormField(
+                _buildTextField(
                   controller: _seriesController,
-                  decoration: const InputDecoration(
-                    label: Text('Num. of series'),
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) => _validator(value),
+                  label: 'Num. of series',
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -74,7 +69,9 @@ class _FormWidgetState extends State<FormWidget> {
                       },
                       child: Text(
                         'Cancel',
-                        style: AppTheme.textStyle,
+                        style: AppTheme.textStyle.copyWith(
+                          color: Colors.grey[600],
+                        ),
                       ),
                     ),
                     TextButton(
@@ -105,6 +102,25 @@ class _FormWidgetState extends State<FormWidget> {
           ),
         ),
       ),
+    );
+  }
+
+  TextFormField _buildTextField({required TextEditingController controller, required String label}) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        label: Text(label),
+        border: const OutlineInputBorder(),
+      ),
+      textInputAction: controller == _seriesController
+          ? TextInputAction.done
+          : TextInputAction.next,
+      keyboardType: const TextInputType.numberWithOptions(
+        decimal: false,
+        signed: false,
+      ),
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      validator: (value) => _validator(value),
     );
   }
 

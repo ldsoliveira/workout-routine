@@ -38,26 +38,29 @@ class _WeekDaysWidgetState extends State<WeekDaysWidget> {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(7, (index) {
-          return TextButton(
-            style: ButtonStyle(
-              backgroundColor: index == _selectedIndex ? MaterialStateProperty.all(Colors.grey[300]) : null,
-              overlayColor: MaterialStateProperty.all(Colors.green[200])
-            ),
-            child: Text(
-              _buildTitle(index),
-              style: AppTheme.textStyle,
-            ),
-            onPressed: () {
-              setState(() {
-                _selectedIndex = index;
-              });
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: List.generate(7, (index) {
+            return TextButton(
+              style: ButtonStyle(
+                backgroundColor: index == _selectedIndex ? MaterialStateProperty.all(Colors.grey[300]) : null,
+                overlayColor: MaterialStateProperty.all(Colors.green[200])
+              ),
+              child: Text(
+                _buildTitle(index),
+                style: AppTheme.textStyle,
+              ),
+              onPressed: () {
+                setState(() {
+                  _selectedIndex = index;
+                });
 
-              BlocProvider.of<RoutineBloc>(context).add(UpdateWeekdayIndexEvent(index));
-            },
-          );
-        }),
+                BlocProvider.of<RoutineBloc>(context).add(UpdateWeekdayIndexEvent(index));
+              },
+            );
+          }),
+        ),
       ),
     );
   }

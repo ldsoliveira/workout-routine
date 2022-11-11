@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.ldsoliveiradev.workout_routine">
    <application
-        android:label="workout_routine"
+        android:label="Workout routine"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

@@ -117,7 +117,7 @@ class _ExerciseListState extends State<ExerciseList> {
       ),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       padding: const EdgeInsets.all(10),
-      child: const Text('No items has been added. Tap on the plus button on the right-bottom corner to add an exercise.'),
+      child: const Text('No items has been added. Tap on the plus button on the bottom-right corner to add an exercise.'),
     );
   }
 }

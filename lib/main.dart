@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Workout Routine',
         theme: AppTheme.theme,
+        debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRoutes.onGenerateRoutes,
         initialRoute: '/',
       ),
