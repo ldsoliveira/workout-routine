@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:workout_routine/core/theme/app_theme.dart';
+import 'package:workout_routine/core/utils/app_log.dart';
 import 'package:workout_routine/features/routine/presentation/bloc/routine_bloc.dart';
 
 class WeekDaysWidget extends StatefulWidget {
@@ -18,21 +20,21 @@ class _WeekDaysWidgetState extends State<WeekDaysWidget> {
     String _buildTitle(int index) {
       switch(index) {
         case 0:
-          return 'Monday';
+          return 'weekday-monday'.i18n();
         case 1:
-          return 'Tuesday';
+          return 'weekday-tuesday'.i18n();
         case 2:
-          return 'Wednesday';
+          return 'weekday-wednesday'.i18n();
         case 3:
-          return 'Thursday';
+          return 'weekday-thursday'.i18n();
         case 4:
-          return 'Friday';
+          return 'weekday-friday'.i18n();
         case 5:
-          return 'Saturday';
+          return 'weekday-saturday'.i18n();
         case 6:
-          return 'Sunday';
+          return 'weekday-sunday'.i18n();
         default:
-          return 'Monday';
+          return 'weekday-monday'.i18n();
       }
     }
 
@@ -57,6 +59,12 @@ class _WeekDaysWidgetState extends State<WeekDaysWidget> {
                 });
 
                 BlocProvider.of<RoutineBloc>(context).add(UpdateWeekdayIndexEvent(index));
+
+                AppLog.log(
+                    className: 'WeekDaysWidget',
+                    methodName: 'onPressed Weekday',
+                    text: 'User changed selected weekday successfully'
+                );
               },
             );
           }),

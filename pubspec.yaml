@@ -40,7 +40,11 @@ dependencies:
   path: ^1.8.1
   flutter_bloc: ^8.1.1
   flutter_launcher_icons: ^0.10.0
+  flutter_localizations:
+    sdk: flutter
+  f_logs: ^2.0.1
   bloc: ^8.1.0
+  localization: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -65,9 +69,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - lib/i18n/
+
   fonts:
     - family: Nunito
       fonts:

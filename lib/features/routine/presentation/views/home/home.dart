@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:workout_routine/core/theme/app_theme.dart';
+import 'package:workout_routine/core/utils/app_log.dart';
 import 'package:workout_routine/core/utils/constants.dart';
 import 'package:workout_routine/features/routine/data/models/exercise_model.dart';
 import 'package:workout_routine/features/routine/presentation/bloc/routine_bloc.dart';
@@ -22,6 +24,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    AppLog.log(className: 'Home', methodName: 'InitState', text: 'App initiated successfully.');
 
     BlocProvider.of<RoutineBloc>(context).add(
       UpdateWeekdayIndexEvent(BlocProvider.of<RoutineBloc>(context).dayOfWeek)
@@ -48,7 +51,7 @@ class _HomeState extends State<Home> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Workout routine'),
+          title: Text('app-title'.i18n()),
           actions: [
             PopupMenuButton(
               icon: const Icon(
@@ -62,8 +65,15 @@ class _HomeState extends State<Home> {
                       BlocProvider.of<RoutineBloc>(context).add(
                         UncheckTodayExercisesEvent()
                       );
+
+                      AppLog.log(
+                        className: 'Home',
+                        methodName: 'onTap PopupMenuItem',
+                        text: 'User tapped on uncheck exercises for '
+                          '${BlocProvider.of<RoutineBloc>(context).dayOfWeek}'
+                      );
                     },
-                    child: const Text('Uncheck today exercises'),
+                    child: Text('uncheck-exercises'.i18n()),
                   )
                 ];
               },
@@ -76,6 +86,12 @@ class _HomeState extends State<Home> {
           elevation: 2,
           child: const Icon(Icons.add),
           onPressed: () {
+            AppLog.log(
+              className: 'Home',
+              methodName: 'onPressed FAB',
+              text: 'User tapped add exercise FAB'
+            );
+
             Navigator.pushNamed(context, FormWidget.routeName);
           },
         ),

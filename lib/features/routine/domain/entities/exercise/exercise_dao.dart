@@ -1,11 +1,11 @@
 import 'package:sembast/sembast.dart';
 import 'package:workout_routine/core/utils/app_database.dart';
+import 'package:workout_routine/core/utils/constants.dart';
 import 'package:workout_routine/features/routine/data/models/exercise_model.dart';
 import 'package:workout_routine/features/routine/domain/entities/exercise/exercise.dart';
 
 class ExerciseDao {
-  static const String folderName = "Exercise";
-  final _exercisesFolder = intMapStoreFactory.store(folderName);
+  final _exercisesFolder = intMapStoreFactory.store(Constants.dbExerciseFolderName);
 
   Future<Database> get _db async => AppDatabase.instance.db;
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:workout_routine/core/theme/app_theme.dart';
+import 'package:workout_routine/core/utils/app_log.dart';
 import 'package:workout_routine/features/routine/data/models/exercise_model.dart';
 import 'package:workout_routine/features/routine/presentation/bloc/routine_bloc.dart';
 
@@ -39,27 +41,45 @@ class _ExerciseListState extends State<ExerciseList> {
               child: const Icon(Icons.delete),
             ),
             confirmDismiss: (direction) async {
+              AppLog.log(
+                className: 'ExerciseList',
+                methodName: 'Dismiss Exercise',
+                text: 'User dismissed the exercise ${widget.exercises[index]}'
+              );
+
               return showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text('Really want to remove ${widget.exercises[index].name}?'),
-                  content: const Text('This action can not be undone.'),
+                  title: Text('remove-dialog-title'.i18n([widget.exercises[index].name])),
+                  content: Text('remove-dialog-content'.i18n()),
                   actions: [
                     TextButton(
                       onPressed: () {
+                        AppLog.log(
+                            className: 'ExerciseList',
+                            methodName: 'Confirmation dialog',
+                            text: 'User canceled the removal of the exercise ${widget.exercises[index]}'
+                        );
+
                         Navigator.pop(context);
                       },
-                      child: const Text('CANCEL')
+                      child: Text('remove-dialog-cancel'.i18n().toUpperCase())
                     ),
                     TextButton(
                       onPressed: () {
+                        AppLog.log(
+                            className: 'ExerciseList',
+                            methodName: 'Confirmation dialog',
+                            text: 'User removed the exercise ${widget.exercises[index]}'
+                        );
+
                         BlocProvider.of<RoutineBloc>(context).add(
                           RemoveExerciseEvent(exercise: widget.exercises[index])
                         );
 
                         Navigator.of(context).pop();
                       },
-                      child: const Text('OK')
+                      child: Text('remove-dialog-accept'.i18n().toUpperCase())
                     ),
                   ],
                 ),
@@ -82,13 +102,22 @@ class _ExerciseListState extends State<ExerciseList> {
                   ),
                 ),
                 subtitle: Text(
-                  '${widget.exercises[index].series} series of ${widget.exercises[index].repetitions}',
+                  'list-subtitle'.i18n([
+                    widget.exercises[index].series.toString(),
+                    widget.exercises[index].repetitions.toString()
+                  ]),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                   ),
                 ),
                 onChanged: (newValue) {
+                  AppLog.log(
+                      className: 'ExerciseList',
+                      methodName: 'onChanged Check Exercise',
+                      text: 'User checked the exercise ${widget.exercises[index]}'
+                  );
+
                   BlocProvider.of<RoutineBloc>(context).add(
                     UpdateDoneExerciseEvent(
                       exercise: widget.exercises[index],
@@ -117,7 +146,7 @@ class _ExerciseListState extends State<ExerciseList> {
       ),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       padding: const EdgeInsets.all(10),
-      child: const Text('No items has been added. Tap on the plus button on the bottom-right corner to add an exercise.'),
+      child: Text('empty-list'.i18n()),
     );
   }
 }

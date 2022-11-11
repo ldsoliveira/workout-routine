@@ -1,0 +1,33 @@
+{
+  "app-title": "Workout Routine",
+  "uncheck-exercises": "Uncheck selected day exercises",
+
+
+  "remove-dialog-title": "Are you sure you want to remove %s?",
+  "remove-dialog-content": "This action can not be undone.",
+  "remove-dialog-cancel": "Cancel",
+  "remove-dialog-accept": "Ok",
+
+
+  "empty-list": "No items has been added. Tap on the plus button on the bottom-right corner to add an exercise.",
+  "list-subtitle": "%s0 series of %s1",
+
+
+  "form-title": "Add exercise form",
+  "form-name-label": "Name",
+  "form-reps-label": "Num. of reps",
+  "form-series-label": "Num. of series",
+  "form-cancel": "Cancel",
+  "form-accept": "Add exercise",
+  "form-required-field": "Required field",
+
+
+  "weekday-monday": "Monday",
+  "weekday-tuesday": "Tuesday",
+  "weekday-wednesday": "Wednesday",
+  "weekday-thursday": "Thursday",
+  "weekday-friday": "Friday",
+  "weekday-saturday": "Saturday",
+  "weekday-sunday": "Sunday"
+}
+

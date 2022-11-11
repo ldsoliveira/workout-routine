@@ -1,10 +1,10 @@
 import 'package:sembast/sembast.dart';
 import 'package:workout_routine/core/utils/app_database.dart';
+import 'package:workout_routine/core/utils/constants.dart';
 import 'package:workout_routine/features/routine/data/models/user_model.dart';
 
 class UserDao {
-  static const String folderName = "User";
-  final _exercisesFolder = intMapStoreFactory.store(folderName);
+  final _exercisesFolder = intMapStoreFactory.store(Constants.dbUserFolderName);
 
   Future<Database> get _db async => AppDatabase.instance.database;
 

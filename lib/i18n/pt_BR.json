@@ -1,0 +1,32 @@
+{
+  "app-title": "Workout Routine",
+  "uncheck-exercises": "Desmarcar exercícios do dia selecionado",
+
+
+  "remove-dialog-title": "Tem certeza que quer remover %s?",
+  "remove-dialog-content": "Esta ação não poderá ser desfeita.",
+  "remove-dialog-cancel": "Cancelar",
+  "remove-dialog-accept": "Ok",
+
+
+  "empty-list": "Nenhum item foi adicionado. Toque no botão de adição no canto inferior direito para adicionar um exercício",
+  "list-subtitle": "%s0 séries de %s1",
+
+
+  "form-title": "Formulário de adição",
+  "form-name-label": "Nome",
+  "form-reps-label": "Num. de repetições",
+  "form-series-label": "Num. de séries",
+  "form-cancel": "Cancelar",
+  "form-accept": "Adicionar exercício",
+  "form-required-field": "Campo obrigatório",
+
+
+  "weekday-monday": "Segunda-feira",
+  "weekday-tuesday": "Terça-feira",
+  "weekday-wednesday": "Quarta-feira",
+  "weekday-thursday": "Quinta-feira",
+  "weekday-friday": "Sexta-feira",
+  "weekday-saturday": "Sábado",
+  "weekday-sunday": "Domingo"
+}

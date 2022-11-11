@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:workout_routine/core/theme/app_theme.dart';
+import 'package:workout_routine/core/utils/app_log.dart';
 import 'package:workout_routine/core/utils/constants.dart';
 import 'package:workout_routine/features/routine/presentation/bloc/routine_bloc.dart';
 
@@ -28,7 +30,7 @@ class _FormWidgetState extends State<FormWidget> {
       tag: Constants.tagKey,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Add exercise form'),
+          title: Text('form-title'.i18n()),
           iconTheme: const IconThemeData(
             color: Colors.white,
           ),
@@ -39,36 +41,43 @@ class _FormWidgetState extends State<FormWidget> {
             key: _formKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
                   controller: _nameController,
                   autofocus: true,
                   textInputAction: TextInputAction.next,
-                  decoration: const InputDecoration(
-                    label: Text('Name'),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    label: Text('form-name-label'.i18n()),
+                    border: const OutlineInputBorder(),
                   ),
                   validator: (value) => _validator(value),
                 ),
                 const SizedBox(height: 8),
                 _buildTextField(
-                  controller: _repsController,
-                  label: 'Num. of reps',
+                  controller: _seriesController,
+                  label: 'form-series-label'.i18n(),
                 ),
                 const SizedBox(height: 8),
                 _buildTextField(
-                  controller: _seriesController,
-                  label: 'Num. of series',
+                  controller: _repsController,
+                  label: 'form-reps-label'.i18n(),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     TextButton(
                       onPressed: () {
+                        AppLog.log(
+                          className: 'FormWidget',
+                          methodName: 'onPressed Cancel',
+                          text: 'User canceled the addition'
+                        );
+
                         Navigator.of(context).pop();
                       },
                       child: Text(
-                        'Cancel',
+                        'form-cancel'.i18n(),
                         style: AppTheme.textStyle.copyWith(
                           color: Colors.grey[600],
                         ),
@@ -76,6 +85,12 @@ class _FormWidgetState extends State<FormWidget> {
                     ),
                     TextButton(
                       onPressed: () {
+                        AppLog.log(
+                          className: 'FormWidget',
+                          methodName: 'onPressed Add Exercise',
+                          text: 'User tried to add an exercise'
+                        );
+
                         if(_formKey.currentState?.validate() ?? false) {
                           BlocProvider.of<RoutineBloc>(context).add(
                             AddExerciseEvent(
@@ -85,13 +100,28 @@ class _FormWidgetState extends State<FormWidget> {
                             ),
                           );
 
+                          AppLog.log(
+                            className: 'FormWidget',
+                            methodName: 'onPressed Add Exercise',
+                            text: 'User added the exercise successfully'
+                          );
+
                           Navigator.of(context).pop();
                         }
+
+                        AppLog.log(
+                          className: 'FormWidget',
+                          methodName: 'onPressed Add Exercise',
+                          text: 'User tried to add an invalid exercise. '
+                            'Name: ${_nameController.text} '
+                            'Series: ${_seriesController.text} '
+                            'Reps: ${_repsController.text}'
+                        );
 
                         return;
                       },
                       child: Text(
-                        'Add exercise',
+                        'form-accept'.i18n(),
                         style: AppTheme.textStyle,
                       ),
                     ),
@@ -112,7 +142,7 @@ class _FormWidgetState extends State<FormWidget> {
         label: Text(label),
         border: const OutlineInputBorder(),
       ),
-      textInputAction: controller == _seriesController
+      textInputAction: controller == _repsController
           ? TextInputAction.done
           : TextInputAction.next,
       keyboardType: const TextInputType.numberWithOptions(
@@ -126,7 +156,7 @@ class _FormWidgetState extends State<FormWidget> {
 
   String? _validator(String? value) {
     if(value == null || value.isEmpty) {
-      return 'Required field';
+      return 'form-required-field'.i18n();
     }
 
     return null;
