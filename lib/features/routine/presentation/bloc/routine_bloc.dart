@@ -11,7 +11,7 @@ part 'routine_state.dart';
 
 class RoutineBloc extends Bloc<RoutineEvent, RoutineState> {
   final ExerciseUsecase _exerciseUsecase;
-  int dayOfWeek = 0;
+  int dayOfWeek = 1;
 
   RoutineBloc(this._exerciseUsecase) : super(RoutineInitial()) {
     on<UpdateWeekdayIndexEvent>(_updateWeekdayIndex);
